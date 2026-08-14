@@ -66,8 +66,12 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: android-apk
-          path: |
-            Moonfin_Android_v*.apk
-            Moonfin_AndroidTV_v*.apk
+          name: moonfin-android-apk
+          path: Moonfin_Android_v*.apk
+          if-no-files-found: error
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: moonfin-androidtv-apk
+          path: Moonfin_AndroidTV_v*.apk
           if-no-files-found: error
