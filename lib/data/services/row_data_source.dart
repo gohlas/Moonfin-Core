@@ -94,6 +94,12 @@ class RowDataSource {
     }
   }
 
+  /// A rejected request is worth one more try without the optional fields,
+  /// since a server that has no name for one of them turns the whole call down
+  /// rather than ignoring it.
+  static bool _shouldRetryWithoutFields(int statusCode) =>
+      statusCode == 400 || statusCode >= 500;
+
   Future<bool> hasLiveTvChannels() async {
     final response = await _client.liveTvApi.getChannels(
       limit: 1,
@@ -117,9 +123,10 @@ class RowDataSource {
     );
   }
 
-  Future<HomeRow> loadResume(String serverId) async {
+  Future<HomeRow> loadResume(String serverId, {int? startIndex}) async {
     final response = await _getResumeItemsWithFallback(
       includeItemTypes: ['Movie', 'Episode'],
+      startIndex: startIndex,
       limit: _defaultLimit,
     );
     return _buildRow(
@@ -145,8 +152,9 @@ class RowDataSource {
     );
   }
 
-  Future<HomeRow> loadNextUp(String serverId) async {
+  Future<HomeRow> loadNextUp(String serverId, {int? startIndex}) async {
     final response = await _getNextUpWithFallback(
+      startIndex: startIndex,
       limit: _defaultLimit,
       enableResumable: false,
     );
@@ -445,7 +453,7 @@ class RowDataSource {
     } on DioException catch (e) {
       final statusCode = e.response?.statusCode ?? 0;
       _recordIfAccessDenied(statusCode, parentId);
-      if (statusCode < 500) rethrow;
+      if (!_shouldRetryWithoutFields(statusCode)) rethrow;
       response = await _client.itemsApi.getGenres(
         parentId: parentId,
         sortBy: sortBy,
@@ -513,7 +521,7 @@ class RowDataSource {
       } on DioException catch (e) {
         final statusCode = e.response?.statusCode ?? 0;
         _recordIfAccessDenied(statusCode, parentId);
-        if (statusCode < 500) rethrow;
+        if (!_shouldRetryWithoutFields(statusCode)) rethrow;
         return _client.itemsApi.getStudios(
           parentId: parentId,
           userId: _client.userId,
@@ -1473,10 +1481,25 @@ class RowDataSource {
             return (row.items, row.totalCount);
           }
         }
-      case HomeRowType.recentlyReleased:
       case HomeRowType.resume:
+        response = await _getResumeItemsWithFallback(
+          includeItemTypes: const ['Movie', 'Episode'],
+          startIndex: currentOffset,
+          limit: _defaultLimit,
+        );
       case HomeRowType.resumeAudio:
+        response = await _getResumeItemsWithFallback(
+          includeItemTypes: const ['Audio'],
+          startIndex: currentOffset,
+          limit: _defaultLimit,
+        );
       case HomeRowType.nextUp:
+        response = await _getNextUpWithFallback(
+          startIndex: currentOffset,
+          limit: _defaultLimit,
+          enableResumable: false,
+        );
+      case HomeRowType.recentlyReleased:
       case HomeRowType.libraryTiles:
       case HomeRowType.libraryTilesSmall:
       case HomeRowType.liveTv:
@@ -1575,6 +1598,7 @@ class RowDataSource {
   Future<Map<String, dynamic>> _getResumeItemsWithFallback({
     String? parentId,
     List<String>? includeItemTypes,
+    int? startIndex,
     required int limit,
   }) async {
     try {
@@ -1582,6 +1606,7 @@ class RowDataSource {
           .getResumeItems(
             parentId: parentId,
             includeItemTypes: includeItemTypes,
+            startIndex: startIndex,
             limit: limit,
             fields: _fields,
             enableImageTypes: _imageTypes,
@@ -1594,6 +1619,7 @@ class RowDataSource {
           .getResumeItems(
             parentId: parentId,
             includeItemTypes: includeItemTypes,
+            startIndex: startIndex,
             limit: limit,
             fields: _fallbackFields,
             enableImageTypes: _imageTypes,
@@ -1607,6 +1633,7 @@ class RowDataSource {
       final response = await _client.itemsApi.getResumeItems(
         parentId: parentId,
         includeItemTypes: includeItemTypes,
+        startIndex: startIndex,
         limit: limit,
         fields: _fallbackFields,
         enableImageTypes: _imageTypes,
@@ -1618,6 +1645,7 @@ class RowDataSource {
 
   Future<Map<String, dynamic>> _getNextUpWithFallback({
     String? parentId,
+    int? startIndex,
     required int limit,
     bool? enableResumable,
   }) async {
@@ -1625,6 +1653,7 @@ class RowDataSource {
       final response = await _client.itemsApi
           .getNextUp(
             parentId: parentId,
+            startIndex: startIndex,
             limit: limit,
             fields: _fields,
             enableImageTypes: _imageTypes,
@@ -1638,6 +1667,7 @@ class RowDataSource {
       final response = await _client.itemsApi
           .getNextUp(
             parentId: parentId,
+            startIndex: startIndex,
             limit: limit,
             fields: _fallbackFields,
             enableImageTypes: _imageTypes,
@@ -1652,6 +1682,7 @@ class RowDataSource {
       if (statusCode < 500) rethrow;
       final response = await _client.itemsApi.getNextUp(
         parentId: parentId,
+        startIndex: startIndex,
         limit: limit,
         fields: _fallbackFields,
         enableImageTypes: _imageTypes,
