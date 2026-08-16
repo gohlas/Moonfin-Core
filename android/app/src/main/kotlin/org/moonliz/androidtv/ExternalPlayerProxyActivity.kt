@@ -1,4 +1,4 @@
-package org.moonfin.androidtv
+package org.moonliz.androidtv
 
 import android.app.Activity
 import android.content.ActivityNotFoundException
@@ -10,9 +10,9 @@ class ExternalPlayerProxyActivity : Activity() {
 
     companion object {
         private const val REQUEST_EXTERNAL_PLAYER = 8021
-        private const val EXTRA_EXTERNAL_PLAYER_LAUNCH_INTENT = "moonfin.external_player.launch_intent"
-        private const val EXTRA_EXTERNAL_PLAYER_ERROR_CODE = "moonfin.external_player.error_code"
-        private const val EXTRA_EXTERNAL_PLAYER_ERROR_MESSAGE = "moonfin.external_player.error_message"
+        private const val EXTRA_EXTERNAL_PLAYER_LAUNCH_INTENT = "moonliz.external_player.launch_intent"
+        private const val EXTRA_EXTERNAL_PLAYER_ERROR_CODE = "moonliz.external_player.error_code"
+        private const val EXTRA_EXTERNAL_PLAYER_ERROR_MESSAGE = "moonliz.external_player.error_message"
     }
 
     private var launchStarted = false

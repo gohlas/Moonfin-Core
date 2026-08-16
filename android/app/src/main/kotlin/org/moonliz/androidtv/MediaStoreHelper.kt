@@ -1,4 +1,4 @@
-package org.moonfin.androidtv
+package org.moonliz.androidtv
 
 import android.content.ContentValues
 import android.content.Context
@@ -12,8 +12,8 @@ import io.flutter.plugin.common.MethodChannel
 class MediaStoreHelper(private val context: Context) : MethodChannel.MethodCallHandler {
 
     companion object {
-        const val CHANNEL = "com.moonfin/media_store"
-        private const val SUBFOLDER = "Moonfin"
+        const val CHANNEL = "com.moonliz/media_store"
+        private const val SUBFOLDER = "MoonLiz"
     }
 
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {

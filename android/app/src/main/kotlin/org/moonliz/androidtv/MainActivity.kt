@@ -1,4 +1,4 @@
-package org.moonfin.androidtv
+package org.moonliz.androidtv
 
 import android.app.Activity
 import android.app.PendingIntent
@@ -128,23 +128,23 @@ class MainActivity : AudioServiceActivity(), GamepadsCompatibleActivity {
     }
 
     companion object {
-        private const val CHANNEL = "org.moonfin.androidtv/pip"
+        private const val CHANNEL = "org.moonliz.androidtv/pip"
         private const val CAST_CHANNEL = "com.moonfin/native_cast"
         private const val CAST_EVENTS_CHANNEL = "com.moonfin/native_cast_events"
         private const val DLNA_CHANNEL = "com.moonfin/native_dlna"
         private const val DLNA_EVENTS_CHANNEL = "com.moonfin/native_dlna_events"
-        private const val EXTERNAL_PLAYER_CHANNEL = "moonfin/external_player"
-        private const val ACTION_PLAY_PAUSE = "org.moonfin.androidtv.ACTION_PIP_PLAY_PAUSE"
+        private const val EXTERNAL_PLAYER_CHANNEL = "moonliz/external_player"
+        private const val ACTION_PLAY_PAUSE = "org.moonliz.androidtv.ACTION_PIP_PLAY_PAUSE"
         private const val DISMISS_DELAY_MS = 300L
-        private const val PLATFORM_CHANNEL = "org.moonfin.androidtv/platform"
-        private const val GAMEPAD_CHANNEL = "org.moonfin.androidtv/gamepad"
+        private const val PLATFORM_CHANNEL = "org.moonliz.androidtv/platform"
+        private const val GAMEPAD_CHANNEL = "org.moonliz.androidtv/gamepad"
         private const val WATCH_NEXT_CHANNEL = WatchNextWorker.CHANNEL
         private const val AUDIO_CAPS_EVENTS_CHANNEL =
-            "org.moonfin.androidtv/audioCapabilitiesEvents"
+            "org.moonliz.androidtv/audioCapabilitiesEvents"
         private const val EXTERNAL_PLAYER_PROXY_REQUEST_CODE = 17115
-        private const val EXTRA_EXTERNAL_PLAYER_LAUNCH_INTENT = "moonfin.external_player.launch_intent"
-        private const val EXTRA_EXTERNAL_PLAYER_ERROR_CODE = "moonfin.external_player.error_code"
-        private const val EXTRA_EXTERNAL_PLAYER_ERROR_MESSAGE = "moonfin.external_player.error_message"
+        private const val EXTRA_EXTERNAL_PLAYER_LAUNCH_INTENT = "moonliz.external_player.launch_intent"
+        private const val EXTRA_EXTERNAL_PLAYER_ERROR_CODE = "moonliz.external_player.error_code"
+        private const val EXTRA_EXTERNAL_PLAYER_ERROR_MESSAGE = "moonliz.external_player.error_message"
         private const val EXTERNAL_PLAYER_CHOOSER_TITLE = "Play with"
         private const val EXTERNAL_PLAYER_SAMPLE_URL = "http://127.0.0.1/sample.mp4"
 
@@ -225,7 +225,7 @@ class MainActivity : AudioServiceActivity(), GamepadsCompatibleActivity {
         } else {
             "id=${Uri.encode(itemId)}&serverId=${Uri.encode(serverId)}"
         }
-        return "moonfin://item?$query"
+        return "moonliz://item?$query"
     }
 
     // Null travels back to Dart as "ask again" rather than as "not a TV".
@@ -993,7 +993,7 @@ class MainActivity : AudioServiceActivity(), GamepadsCompatibleActivity {
         val targetId = args["targetId"] as? String
         val streamUrl = args["streamUrl"] as? String
         val contentType = args["contentType"] as? String
-        val title = args["title"] as? String ?: "Moonfin"
+        val title = args["title"] as? String ?: "MoonLiz"
         val subtitle = args["subtitle"] as? String
         val posterUrl = args["posterUrl"] as? String
         val queueItems = parseQueueItems(args["queueItems"])
@@ -1197,7 +1197,7 @@ class MainActivity : AudioServiceActivity(), GamepadsCompatibleActivity {
         return entries.mapNotNull { entry ->
             val map = entry as? Map<*, *> ?: return@mapNotNull null
             val streamUrl = map["streamUrl"] as? String ?: return@mapNotNull null
-            val title = map["title"] as? String ?: "Moonfin"
+            val title = map["title"] as? String ?: "MoonLiz"
             buildMap<String, Any> {
                 put("streamUrl", streamUrl)
                 put("title", title)
@@ -1245,7 +1245,7 @@ class MainActivity : AudioServiceActivity(), GamepadsCompatibleActivity {
         val mediaInfo = buildMediaInfo(
             streamUrl = url,
             contentType = contentType,
-            title = title ?: "Moonfin",
+            title = title ?: "MoonLiz",
             subtitle = subtitle,
             posterUrl = posterUrl,
         )

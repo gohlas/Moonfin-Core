@@ -10699,7 +10699,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   AppLocalizationsPtBr() : super('pt_BR');
 
   @override
-  String get appTitle => 'Moonfin';
+  String get appTitle => 'MoonLiz';
 
   @override
   String get accountPreferences => 'PREFERÊNCIAS DA CONTA';
@@ -10770,7 +10770,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String appVersionFooter(String version) {
-    return 'Moonfin versão $version';
+    return 'MoonLiz versão $version';
   }
 
   @override
@@ -10822,7 +10822,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get secureStorageUnavailableMessage =>
-      'Moonfin não conseguiu acessar o chaveiro do seu sistema. O login pode continuar, mas o armazenamento seguro de tokens pode ficar indisponível até que o chaveiro seja desbloqueado.';
+      'MoonLiz não conseguiu acessar o chaveiro do seu sistema. O login pode continuar, mas o armazenamento seguro de tokens pode ficar indisponível até que o chaveiro seja desbloqueado.';
 
   @override
   String get ok => 'OK';
@@ -10835,7 +10835,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get detailScreenStyleSubtitle =>
-      'Clássico é o layout centralizado original do Moonfin. Moderno é um layout cinematográfico responsivo.';
+      'Clássico é o layout centralizado original do MoonLiz. Moderno é um layout cinematográfico responsivo.';
 
   @override
   String get detailScreenStyleMoonfin => 'Clássico';
@@ -10862,10 +10862,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get recommendationSystemSubtitle =>
-      'Use o algoritmo de biblioteca local do Moonfin Recommends ou as métricas de similaridade online do TMDb. Observação: recomendações online exigem a integração com o Seerr.';
+      'Use o algoritmo de biblioteca local do MoonLiz Recommends ou as métricas de similaridade online do TMDb. Observação: recomendações online exigem a integração com o Seerr.';
 
   @override
-  String get recommendationSystemMoonfin => 'Moonfin Recommends';
+  String get recommendationSystemMoonfin => 'MoonLiz Recommends';
 
   @override
   String get recommendationSystemTmdb => 'Similaridade do TMDb';
@@ -10876,7 +10876,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get recommendationsApplyParentalRatingCapSubtitle =>
-      'Limitar as sugestões do Moonfin Recommends pela classificação indicativa da mídia de destino';
+      'Limitar as sugestões do MoonLiz Recommends pela classificação indicativa da mídia de destino';
 
   @override
   String get interfaceStyle => 'Estilo da interface';
@@ -10912,14 +10912,14 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get settingsAppearanceThemeSubtitle =>
-      'Alterne entre Moonfin e Neon Pulse sem reiniciar o aplicativo';
+      'Alterne entre MoonLiz e Neon Pulse sem reiniciar o aplicativo';
 
   @override
   String get customThemeTitle => 'Tema personalizado';
 
   @override
   String get customThemeSubtitle =>
-      'Temas personalizados alteram elementos visuais em todo o Moonfin. Escolha uma destas opções para combinar com o seu estilo.';
+      'Temas personalizados alteram elementos visuais em todo o MoonLiz. Escolha uma destas opções para combinar com o seu estilo.';
 
   @override
   String get keyboardPreferSystemIme => 'Preferir o teclado do sistema';
@@ -10929,11 +10929,11 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
       'Usar o método de entrada do seu dispositivo por padrão para digitar';
 
   @override
-  String get themeMoonfin => 'Moonfin';
+  String get themeMoonfin => 'MoonLiz';
 
   @override
   String get themeMoonfinSubtitle =>
-      'Look atual do Moonfin que todos vocês adoraram';
+      'Look atual do MoonLiz que todos vocês adoraram';
 
   @override
   String get themeNeonPulse => 'Neon Pulse';
@@ -11008,7 +11008,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   }
 
   @override
-  String get exitApp => 'Sair do Moonfin?';
+  String get exitApp => 'Sair do MoonLiz?';
 
   @override
   String get exitAppConfirmation => 'Tem certeza de que deseja sair?';
@@ -12042,7 +12042,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get shuffleAllMusic => 'Reproduzir tudo aleatoriamente';
 
   @override
-  String get carSignInPrompt => 'Entre no Moonfin pelo seu celular';
+  String get carSignInPrompt => 'Entre no MoonLiz pelo seu celular';
 
   @override
   String get carServerUnreachable => 'Não foi possível acessar seu servidor';
@@ -13457,7 +13457,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get notSetMpvConf =>
-      'Não definido. Moonfin tentará um mpv.conf padrão nas pastas app/data.';
+      'Não definido. MoonLiz tentará um mpv.conf padrão nas pastas app/data.';
 
   @override
   String get selectMpvConf => 'Selecione mpv.conf';
@@ -13677,7 +13677,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get downloadsVisibleToOtherApps =>
-      'Downloads/Moonfin – visível para outros aplicativos';
+      'Downloads/MoonLiz – visível para outros aplicativos';
 
   @override
   String get dangerZone => 'Zona de perigo';
@@ -13707,7 +13707,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get saveToDownloadsFolderDescription =>
-      'A mídia baixada será salva em Downloads/Moonfin no seu dispositivo. Esses arquivos ficarão visíveis para outros aplicativos, como sua galeria ou reprodutor de música.\n\nOs downloads existentes permanecerão no local atual.';
+      'A mídia baixada será salva em Downloads/MoonLiz no seu dispositivo. Esses arquivos ficarão visíveis para outros aplicativos, como sua galeria ou reprodutor de música.\n\nOs downloads existentes permanecerão no local atual.';
 
   @override
   String get enable => 'Habilitar';
@@ -13840,7 +13840,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get libraryVisibilityDescription =>
-      'Alternar a visibilidade da página inicial por biblioteca. Reinicie o Moonfin para que as alterações tenham efeito.';
+      'Alternar a visibilidade da página inicial por biblioteca. Reinicie o MoonLiz para que as alterações tenham efeito.';
 
   @override
   String get showInNavigation => 'Mostrar na navegação';
@@ -13892,7 +13892,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
       'Escolha entre vários estilos de barra de mídia ou desative a barra de mídia';
 
   @override
-  String get mediaBarModeMoonfin => 'Moonfin';
+  String get mediaBarModeMoonfin => 'MoonLiz';
 
   @override
   String get mediaBarModeMakd => 'MakD';
@@ -14543,7 +14543,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get cancelRequest => 'Cancelar solicitação';
 
   @override
-  String get playInMoonfin => 'Reproduzir no Moonfin';
+  String get playInMoonfin => 'Reproduzir no MoonLiz';
 
   @override
   String requestedByName(String name) {
@@ -14577,7 +14577,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get itemNotFoundInLibrary =>
-      'Item não encontrado em sua biblioteca Moonfin';
+      'Item não encontrado em sua biblioteca MoonLiz';
 
   @override
   String get errorSearchingLibrary => 'Erro ao pesquisar biblioteca';
@@ -15163,7 +15163,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get adminServerRebootMessage =>
-      'Reinicialização do servidor em andamento, reinicie o Moonfin';
+      'Reinicialização do servidor em andamento, reinicie o MoonLiz';
 
   @override
   String get adminActiveSessions => 'Sessões ativas';
@@ -19021,7 +19021,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get settingsLibraryVisibilitySubtitle =>
-      'Alternar a visibilidade da página inicial por biblioteca. Reinicie o Moonfin para que as alterações tenham efeito.';
+      'Alternar a visibilidade da página inicial por biblioteca. Reinicie o MoonLiz para que as alterações tenham efeito.';
 
   @override
   String get settingsMediaBarAndLocalPreviews =>
@@ -19083,7 +19083,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get settingsJoinTheDiscord => 'Participe do Discord';
 
   @override
-  String get settingsSupportMoonfin => 'Apoie Moonfin';
+  String get settingsSupportMoonfin => 'Apoie MoonLiz';
 
   @override
   String get settingsSupportMoonfinSubtitle =>
@@ -19103,14 +19103,14 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get settingsPrivacyPolicy => 'política de Privacidade';
 
   @override
-  String get settingsPrivacyPolicySubtitle => 'Como Moonfin trata seus dados';
+  String get settingsPrivacyPolicySubtitle => 'Como MoonLiz trata seus dados';
 
   @override
   String get settingsCheckForUpdates => 'Verifique se há atualizações';
 
   @override
   String get settingsCheckForUpdatesSubtitle =>
-      'Verifique o último lançamento do Moonfin';
+      'Verifique o último lançamento do MoonLiz';
 
   @override
   String get settingsPoweredByFlutter => 'Desenvolvido com Flutter';
@@ -19794,7 +19794,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get webDiagnostics => 'Diagnóstico da web';
 
   @override
-  String get webDiagnosticsTitle => 'Diagnóstico da Web do Moonfin';
+  String get webDiagnosticsTitle => 'Diagnóstico da Web do MoonLiz';
 
   @override
   String get webDiagnosticsIntro =>
@@ -19810,11 +19810,11 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get webDiagnosticsMixedContentFailureBody =>
-      'O Moonfin detectou uma página HTTPS tentando chamar uma URL de servidor HTTP. Os navegadores bloqueiam essa solicitação antes que ela chegue ao seu servidor.';
+      'O MoonLiz detectou uma página HTTPS tentando chamar uma URL de servidor HTTP. Os navegadores bloqueiam essa solicitação antes que ela chegue ao seu servidor.';
 
   @override
   String get webDiagnosticsCorsFailureBody =>
-      'O Moonfin detectou uma falha de solicitação no nível do navegador, geralmente causada pela ausência de cabeçalhos CORS ou de preflight no servidor de mídia.';
+      'O MoonLiz detectou uma falha de solicitação no nível do navegador, geralmente causada pela ausência de cabeçalhos CORS ou de preflight no servidor de mídia.';
 
   @override
   String webDiagnosticsTargetUrl(String url) {
@@ -19863,7 +19863,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get webDiagnosticsMixedContentFix =>
-      'Correção: sirva seu servidor de mídia ou endpoint de proxy via HTTPS ou carregue o Moonfin por HTTP apenas em redes locais confiáveis.';
+      'Correção: sirva seu servidor de mídia ou endpoint de proxy via HTTPS ou carregue o MoonLiz por HTTP apenas em redes locais confiáveis.';
 
   @override
   String get webDiagnosticsNoMixedContentDetected =>
@@ -20710,7 +20710,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get impellerRenderingSubtitle =>
-      'O Impeller é o renderizador de GPU moderno do Flutter, com animações mais suaves e menos travamentos. Em alguns TV boxes e GPUs antigas, ele pode causar falhas visuais ou vídeo preto; desative-o se isso acontecer. Automático escolhe o melhor padrão para o seu dispositivo. Reinicie o Moonfin para aplicar.';
+      'O Impeller é o renderizador de GPU moderno do Flutter, com animações mais suaves e menos travamentos. Em alguns TV boxes e GPUs antigas, ele pode causar falhas visuais ou vídeo preto; desative-o se isso acontecer. Automático escolhe o melhor padrão para o seu dispositivo. Reinicie o MoonLiz para aplicar.';
 
   @override
   String get impellerAuto => 'Automático';
@@ -20726,7 +20726,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get impellerRestartMessage =>
-      'O Moonfin precisa ser reiniciado para alterar o mecanismo de renderização. Feche o aplicativo agora e abra-o novamente para aplicar.';
+      'O MoonLiz precisa ser reiniciado para alterar o mecanismo de renderização. Feche o aplicativo agora e abra-o novamente para aplicar.';
 
   @override
   String get impellerCloseNow => 'Fechar o aplicativo agora';

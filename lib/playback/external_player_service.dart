@@ -134,7 +134,7 @@ class ExternalPlayerLaunchResult {
 }
 
 class ExternalPlayerService {
-  static const MethodChannel _channel = MethodChannel('moonfin/external_player');
+  static const MethodChannel _channel = MethodChannel('moonliz/external_player');
 
   const ExternalPlayerService();
 
@@ -161,7 +161,7 @@ class ExternalPlayerService {
                  pkg != 'com.google.android.youtube' &&
                  pkg != 'com.google.android.youtube.tv' &&
                  pkg != 'com.google.android.tv.frameworkpackagestubs' &&
-                 !pkg.startsWith('org.moonfin.androidtv');
+                 !pkg.startsWith('org.moonliz.androidtv');
         })
         .toList(growable: false);
   }

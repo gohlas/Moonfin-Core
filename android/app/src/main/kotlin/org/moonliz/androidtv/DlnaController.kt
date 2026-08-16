@@ -1,4 +1,4 @@
-package org.moonfin.androidtv
+package org.moonliz.androidtv
 
 import android.content.Context
 import android.net.wifi.WifiManager
@@ -179,7 +179,7 @@ class DlnaController(private val context: Context) {
     fun playToDevice(args: Map<*, *>, result: MethodChannel.Result) {
         val targetId = args["targetId"] as? String
         val streamUrl = args["streamUrl"] as? String
-        val title = args["title"] as? String ?: "Moonfin"
+        val title = args["title"] as? String ?: "MoonLiz"
         val startTicks = (args["startPositionTicks"] as? Number)?.toLong()
 
         if (targetId.isNullOrEmpty() || streamUrl.isNullOrEmpty()) {
@@ -377,7 +377,7 @@ class DlnaController(private val context: Context) {
     private fun acquireMulticastLock() {
         if (multicastLock == null) {
             val wifi = context.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
-            multicastLock = wifi.createMulticastLock("moonfin_dlna_discovery").apply {
+            multicastLock = wifi.createMulticastLock("moonliz_dlna_discovery").apply {
                 setReferenceCounted(true)
                 acquire()
             }

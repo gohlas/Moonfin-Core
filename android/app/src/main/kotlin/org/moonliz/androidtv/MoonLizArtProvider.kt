@@ -1,4 +1,4 @@
-package org.moonfin.androidtv
+package org.moonliz.androidtv
 
 import android.content.ContentProvider
 import android.content.ContentValues
@@ -32,9 +32,9 @@ import javax.net.ssl.X509TrustManager
  * icon URI to the car process without granting it any read permission, so an
  * unexported provider is unreadable there. To keep an exported provider from
  * being an open image proxy, we only fetch http/https URLs whose host is one of
- * the signed-in servers the Dart layer recorded in moonfin_art_hosts.
+ * the signed-in servers the Dart layer recorded in moonliz_art_hosts.
  */
-class MoonfinArtProvider : ContentProvider() {
+class MoonLizArtProvider : ContentProvider() {
     override fun onCreate(): Boolean = true
 
     override fun openFile(uri: Uri, mode: String): ParcelFileDescriptor {
@@ -65,7 +65,7 @@ class MoonfinArtProvider : ContentProvider() {
         // shared_preferences stores its keys under the flutter. prefix.
         val raw = ctx
             .getSharedPreferences("FlutterSharedPreferences", Context.MODE_PRIVATE)
-            .getString("flutter.moonfin_art_hosts", "")
+            .getString("flutter.moonliz_art_hosts", "")
             ?: ""
         return raw.split(",").map { it.trim() }.filter { it.isNotEmpty() }.toSet()
     }

@@ -9,7 +9,7 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get appTitle => 'Moonfin';
+  String get appTitle => 'MoonLiz';
 
   @override
   String get accountPreferences => 'ACCOUNT PREFERENCES';
@@ -80,7 +80,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String appVersionFooter(String version) {
-    return 'Moonfin version $version';
+    return 'MoonLiz version $version';
   }
 
   @override
@@ -132,7 +132,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get secureStorageUnavailableMessage =>
-      'Moonfin could not access your system keyring. Login can continue, but secure token storage may be unavailable until the keyring is unlocked.';
+      'MoonLiz could not access your system keyring. Login can continue, but secure token storage may be unavailable until the keyring is unlocked.';
 
   @override
   String get ok => 'OK';
@@ -145,7 +145,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get detailScreenStyleSubtitle =>
-      'Classic is the original centered moonfin layout. Modern is a responsive cinematic layout.';
+      'Classic is the original centered moonliz layout. Modern is a responsive cinematic layout.';
 
   @override
   String get detailScreenStyleMoonfin => 'Classic';
@@ -172,10 +172,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get recommendationSystemSubtitle =>
-      'Use the Moonfin Recommends local-library algorithm or the online TMDb\'s Similarity Metrics. Note: Online recommendations require Seerr integration.';
+      'Use the MoonLiz Recommends local-library algorithm or the online TMDb\'s Similarity Metrics. Note: Online recommendations require Seerr integration.';
 
   @override
-  String get recommendationSystemMoonfin => 'Moonfin Recommends';
+  String get recommendationSystemMoonfin => 'MoonLiz Recommends';
 
   @override
   String get recommendationSystemTmdb => 'TMDb Similarity';
@@ -186,7 +186,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get recommendationsApplyParentalRatingCapSubtitle =>
-      'Limit Moonfin Recommends suggestions by parental rating of target media';
+      'Limit MoonLiz Recommends suggestions by parental rating of target media';
 
   @override
   String get interfaceStyle => 'Interface Style';
@@ -242,7 +242,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get customThemeSubtitle =>
-      'Custom themes alter visual elements across Moonfin. Choose one of these options to suit your style.';
+      'Custom themes alter visual elements across MoonLiz. Choose one of these options to suit your style.';
 
   @override
   String get keyboardPreferSystemIme => 'Prefer system keyboard';
@@ -252,10 +252,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Use your device input method by default for text entry';
 
   @override
-  String get themeMoonfin => 'Moonfin';
+  String get themeMoonfin => 'MoonLiz';
 
   @override
-  String get themeMoonfinSubtitle => 'The original clean Moonfin default.';
+  String get themeMoonfinSubtitle => 'The original clean MoonLiz default.';
 
   @override
   String get themeNeonPulse => 'Neon Pulse';
@@ -330,7 +330,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get exitApp => 'Exit Moonfin?';
+  String get exitApp => 'Exit MoonLiz?';
 
   @override
   String get exitAppConfirmation => 'Are you sure you want to exit?';
@@ -1383,7 +1383,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get shuffleAllMusic => 'Shuffle all music';
 
   @override
-  String get carSignInPrompt => 'Sign in to Moonfin on your phone';
+  String get carSignInPrompt => 'Sign in to MoonLiz on your phone';
 
   @override
   String get carServerUnreachable => 'Can\'t reach your server';
@@ -2858,7 +2858,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get notSetMpvConf =>
-      'Not set. Moonfin will try a default mpv.conf in app/data folders.';
+      'Not set. MoonLiz will try a default mpv.conf in app/data folders.';
 
   @override
   String get selectMpvConf => 'Select mpv.conf';
@@ -3114,14 +3114,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get downloadLocationLimitedByAndroid =>
-      'Android only lets Moonfin write to the folders it owns, and this device has no removable storage. Turn on Save to Downloads folder above to keep downloads somewhere other apps can reach.';
+      'Android only lets MoonLiz write to the folders it owns, and this device has no removable storage. Turn on Save to Downloads folder above to keep downloads somewhere other apps can reach.';
 
   @override
   String get saveToDownloadsFolder => 'Save to Downloads folder';
 
   @override
   String get downloadsVisibleToOtherApps =>
-      'Downloads/Moonfin — visible to other apps';
+      'Downloads/MoonLiz — visible to other apps';
 
   @override
   String get dangerZone => 'Danger Zone';
@@ -3151,7 +3151,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get saveToDownloadsFolderDescription =>
-      'Downloaded media will be saved to Downloads/Moonfin on your device. These files will be visible to other apps such as your gallery or music player.\n\nExisting downloads will remain in their current location.';
+      'Downloaded media will be saved to Downloads/MoonLiz on your device. These files will be visible to other apps such as your gallery or music player.\n\nExisting downloads will remain in their current location.';
 
   @override
   String get transcodingTimeRemainingUnavailable =>
@@ -3294,7 +3294,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get libraryVisibilityDescription =>
-      'Toggle home page visibility per library. Restart Moonfin for changes to take effect.';
+      'Toggle home page visibility per library. Restart MoonLiz for changes to take effect.';
 
   @override
   String get showInNavigation => 'Show in navigation';
@@ -3346,7 +3346,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Choose between various media bar styles, or turn the media bar off';
 
   @override
-  String get mediaBarModeMoonfin => 'Moonfin';
+  String get mediaBarModeMoonfin => 'MoonLiz';
 
   @override
   String get mediaBarModeMakd => 'MakD';
@@ -4038,7 +4038,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cancelRequest4k => 'Cancel 4K Request';
 
   @override
-  String get playInMoonfin => 'Play in Moonfin';
+  String get playInMoonfin => 'Play in MoonLiz';
 
   @override
   String requestedByName(String name) {
@@ -4080,7 +4080,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get keep => 'Keep';
 
   @override
-  String get itemNotFoundInLibrary => 'Item not found in your Moonfin library';
+  String get itemNotFoundInLibrary => 'Item not found in your MoonLiz library';
 
   @override
   String get errorSearchingLibrary => 'Error searching library';
@@ -4672,7 +4672,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get adminServerRebootMessage =>
-      'Server reboot in progress, please restart Moonfin';
+      'Server reboot in progress, please restart MoonLiz';
 
   @override
   String get adminActiveSessions => 'Active Sessions';
@@ -8436,7 +8436,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsLibraryVisibilitySubtitle =>
-      'Toggle home page visibility per library. Restart Moonfin for changes to take effect.';
+      'Toggle home page visibility per library. Restart MoonLiz for changes to take effect.';
 
   @override
   String get settingsMediaBarAndLocalPreviews => 'Media Bar & Local Previews';
@@ -8554,7 +8554,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsJoinTheDiscord => 'Join the Discord';
 
   @override
-  String get settingsSupportMoonfin => 'Support Moonfin';
+  String get settingsSupportMoonfin => 'Support MoonLiz';
 
   @override
   String get settingsSupportMoonfinSubtitle =>
@@ -8573,14 +8573,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsPrivacyPolicy => 'Privacy Policy';
 
   @override
-  String get settingsPrivacyPolicySubtitle => 'How Moonfin handles your data';
+  String get settingsPrivacyPolicySubtitle => 'How MoonLiz handles your data';
 
   @override
   String get settingsCheckForUpdates => 'Check for Updates';
 
   @override
   String get settingsCheckForUpdatesSubtitle =>
-      'Check for the latest Moonfin release';
+      'Check for the latest MoonLiz release';
 
   @override
   String get settingsPoweredByFlutter => 'Powered by Flutter';
@@ -9355,7 +9355,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get webDiagnostics => 'Web diagnostics';
 
   @override
-  String get webDiagnosticsTitle => 'Moonfin Web Diagnostics';
+  String get webDiagnosticsTitle => 'MoonLiz Web Diagnostics';
 
   @override
   String get webDiagnosticsIntro =>
@@ -9371,11 +9371,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get webDiagnosticsMixedContentFailureBody =>
-      'Moonfin detected an HTTPS page trying to call an HTTP server URL. Browsers block this request before it reaches your server.';
+      'MoonLiz detected an HTTPS page trying to call an HTTP server URL. Browsers block this request before it reaches your server.';
 
   @override
   String get webDiagnosticsCorsFailureBody =>
-      'Moonfin detected a browser-level request failure that is commonly caused by missing CORS or preflight headers on the media server.';
+      'MoonLiz detected a browser-level request failure that is commonly caused by missing CORS or preflight headers on the media server.';
 
   @override
   String webDiagnosticsTargetUrl(String url) {
@@ -9423,7 +9423,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get webDiagnosticsMixedContentFix =>
-      'Fix: serve your media server or proxy endpoint via HTTPS, or load Moonfin over HTTP on trusted local networks only.';
+      'Fix: serve your media server or proxy endpoint via HTTPS, or load MoonLiz over HTTP on trusted local networks only.';
 
   @override
   String get webDiagnosticsNoMixedContentDetected =>
@@ -10259,7 +10259,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get impellerRenderingSubtitle =>
-      'Impeller is Flutter\'s modern GPU renderer for smoother animations and less stutter. On some TV boxes and older GPUs it can cause glitches or black video; switch it Off if you see those. Automatic picks the best default for your device. Restart Moonfin to apply.';
+      'Impeller is Flutter\'s modern GPU renderer for smoother animations and less stutter. On some TV boxes and older GPUs it can cause glitches or black video; switch it Off if you see those. Automatic picks the best default for your device. Restart MoonLiz to apply.';
 
   @override
   String get impellerAuto => 'Automatic';
@@ -10275,7 +10275,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get impellerRestartMessage =>
-      'Moonfin needs to restart to change the rendering engine. Close the app now, then reopen it to apply.';
+      'MoonLiz needs to restart to change the rendering engine. Close the app now, then reopen it to apply.';
 
   @override
   String get impellerCloseNow => 'Close app now';

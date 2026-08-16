@@ -11,7 +11,7 @@ import '../models/home_row.dart';
 import 'deep_link_service.dart';
 
 class WatchNextService {
-  static const _channel = MethodChannel('org.moonfin.androidtv/watch_next');
+  static const _channel = MethodChannel('org.moonliz.androidtv/watch_next');
   static const _maxItems = 20;
   // This window lets the progressive home-section loads on a cold start
   // coalesce into a single publish.

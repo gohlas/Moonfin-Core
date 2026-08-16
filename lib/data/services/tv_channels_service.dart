@@ -44,7 +44,7 @@ class TvChannelsService {
   TvChannelsService._();
   static final TvChannelsService _instance = TvChannelsService._();
 
-  static const _channel = MethodChannel('org.moonfin.androidtv/watch_next');
+  static const _channel = MethodChannel('org.moonliz.androidtv/watch_next');
   static const _maxItems = 20;
   static const _debounceDelay = Duration(seconds: 5);
 

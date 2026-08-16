@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 
 class MediaStoreService {
-  static const _channel = MethodChannel('com.moonfin/media_store');
+  static const _channel = MethodChannel('com.moonliz/media_store');
 
   /// Returns the base path for MediaStore downloads: `/storage/emulated/0/Download/Moonfin`
   static Future<String> getMediaStorePath() async {

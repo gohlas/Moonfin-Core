@@ -1,4 +1,4 @@
-name: Build Android + Android TV (Manual)
+name: Build MoonLiz Android + Android TV (Manual)
 
 # Manual-only: builds the Android (mobile) and Android TV APKs on demand via the
 # "Run workflow" button in the Actions tab. No automatic triggers.
@@ -66,12 +66,12 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: moonfin-android-apk
-          path: Moonfin_Android_v*.apk
+          name: moonliz-android-apk
+          path: MoonLiz_Android_v*.apk
           if-no-files-found: error
 
       - uses: actions/upload-artifact@v4
         with:
-          name: moonfin-androidtv-apk
-          path: Moonfin_AndroidTV_v*.apk
+          name: moonliz-androidtv-apk
+          path: MoonLiz_AndroidTV_v*.apk
           if-no-files-found: error

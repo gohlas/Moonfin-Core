@@ -20,10 +20,10 @@ class AudioCapabilityProbe {
   AudioCapabilityProbe._();
 
   static const _androidMethodChannel = MethodChannel(
-    'org.moonfin.androidtv/platform',
+    'org.moonliz.androidtv/platform',
   );
   static const _androidEventChannel = EventChannel(
-    'org.moonfin.androidtv/audioCapabilitiesEvents',
+    'org.moonliz.androidtv/audioCapabilitiesEvents',
   );
   static const _tvosMethodChannel = MethodChannel('moonfin/appletv_audio');
   static const _tvosEventChannel = EventChannel(

@@ -33,7 +33,7 @@ class CarArtwork {
   CarArtwork._();
   static final CarArtwork instance = CarArtwork._();
 
-  static const _hostsKey = 'moonfin_art_hosts';
+  static const _hostsKey = 'moonliz_art_hosts';
 
   String? _authority;
   Future<void>? _init;

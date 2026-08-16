@@ -14,7 +14,7 @@ import '../preference/user_preferences.dart';
 
 Future<void> watchNextBackgroundMain() async {
   WidgetsFlutterBinding.ensureInitialized();
-  const channel = MethodChannel('org.moonfin.androidtv/watch_next');
+  const channel = MethodChannel('org.moonliz.androidtv/watch_next');
 
   var ok = false;
   // Tells the worker that retrying can't help, so it stops booting an engine

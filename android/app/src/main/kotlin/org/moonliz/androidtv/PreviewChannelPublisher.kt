@@ -1,4 +1,4 @@
-package org.moonfin.androidtv
+package org.moonliz.androidtv
 
 import android.content.ContentUris
 import android.content.Context
@@ -98,7 +98,7 @@ class PreviewChannelPublisher(private val context: Context) {
      */
     @RequiresApi(Build.VERSION_CODES.O)
     private fun cleanUpObsoleteChannels(incomingKeys: Set<String>) {
-        val store = context.getSharedPreferences("moonfin_tv_channels", Context.MODE_PRIVATE)
+        val store = context.getSharedPreferences("moonliz_tv_channels", Context.MODE_PRIVATE)
         val edits = store.edit()
         val projection = arrayOf(
             TvContractCompat.Channels._ID,
@@ -147,7 +147,7 @@ class PreviewChannelPublisher(private val context: Context) {
      */
     @RequiresApi(Build.VERSION_CODES.O)
     private fun getChannelId(key: String, title: String, default: Boolean): Long? {
-        val store = context.getSharedPreferences("moonfin_tv_channels", Context.MODE_PRIVATE)
+        val store = context.getSharedPreferences("moonliz_tv_channels", Context.MODE_PRIVATE)
         val appLinkIntent = Intent(context, MainActivity::class.java).apply {
             setPackage(context.packageName)
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP)

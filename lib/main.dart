@@ -154,12 +154,12 @@ Future<void> _restoreWindowGeometry() async {
 /// Resolves whether this Android device is a TV, which decides the leanback UI
 /// and the default playback engine.
 Future<void> _detectAndSetTvMode() async {
-  if (const bool.fromEnvironment('MOONFIN_FORCE_TV')) {
+  if (const bool.fromEnvironment('MOONLIZ_FORCE_TV')) {
     PlatformDetection.setTvMode(true);
     return;
   }
   if (!PlatformDetection.isAndroid) return;
-  const channel = MethodChannel('org.moonfin.androidtv/platform');
+  const channel = MethodChannel('org.moonliz.androidtv/platform');
   const attempts = 3;
   for (var attempt = 0; attempt < attempts; attempt++) {
     try {
@@ -181,7 +181,7 @@ Future<void> _detectAndSetTvMode() async {
 Future<void> _detectAndSetDisplayCapabilities() async {
   if (!(PlatformDetection.isAndroid && PlatformDetection.isTV)) return;
   try {
-    const channel = MethodChannel('org.moonfin.androidtv/platform');
+    const channel = MethodChannel('org.moonliz.androidtv/platform');
     final hdrTypes = await channel.invokeMethod<List<dynamic>>('displayHdrTypes');
     PlatformDetection.setDisplayHdrTypes(
       hdrTypes?.map((value) => value.toString()),
@@ -229,7 +229,7 @@ Future<void> _retryCodecCapsOffLaunchPath(MethodChannel channel) async {
 Future<void> _detectAndSetCodecCapabilities() async {
   if (!PlatformDetection.isAndroid) return;
   try {
-    const channel = MethodChannel('org.moonfin.androidtv/platform');
+    const channel = MethodChannel('org.moonliz.androidtv/platform');
 
     final codecCaps = await _queryCodecCaps(channel);
     if (codecCaps != null) {

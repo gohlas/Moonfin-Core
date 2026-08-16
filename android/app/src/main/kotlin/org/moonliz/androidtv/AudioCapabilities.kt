@@ -1,4 +1,4 @@
-package org.moonfin.androidtv
+package org.moonliz.androidtv
 
 import android.content.Context
 import android.media.AudioDeviceInfo

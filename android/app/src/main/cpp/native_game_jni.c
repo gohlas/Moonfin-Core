@@ -16,7 +16,7 @@
 
 #include "libretro_host.h"
 
-#define LOG_TAG "moonfin_libretro"
+#define LOG_TAG "moonliz_libretro"
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
 
 typedef struct {
@@ -201,7 +201,7 @@ static void teardown(JNIEnv *env) {
 }
 
 #define JNI(ret, name) \
-  JNIEXPORT ret JNICALL Java_org_moonfin_androidtv_LibretroBridge_##name
+  JNIEXPORT ret JNICALL Java_org_moonliz_androidtv_LibretroBridge_##name
 
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved) {
   (void)reserved;

@@ -47,7 +47,7 @@ val hasReleaseKeystore = rootProject.file("app/release.keystore").exists() &&
     (keystoreProperties.getProperty("keyAlias")?.isNotBlank() == true)
 
 android {
-    namespace = "org.moonfin.androidtv"
+    namespace = "org.moonliz.androidtv"
     compileSdk = 36
     ndkVersion = "28.2.13676358"
     val androidTvVersionCode = loadAndroidTvVersionCode(rootDir, flutter.versionCode)
@@ -75,8 +75,8 @@ android {
 
     flavorDimensions += "device"
     productFlavors {
-        val baseAppId = "org.moonfin.androidtv"
-        val baseAppName = "Moonfin"
+        val baseAppId = "org.moonliz.androidtv"
+        val baseAppName = "MoonLiz"
         val mobileAbis = listOf("arm64-v8a", "armeabi-v7a", "x86_64")
         val tvAbis = listOf("arm64-v8a", "armeabi-v7a", "x86_64")
         create("mobile") {

@@ -15,7 +15,7 @@ class AndroidGamepadChannel {
   AndroidGamepadChannel._();
 
   static const MethodChannel _channel = MethodChannel(
-    'org.moonfin.androidtv/gamepad',
+    'org.moonliz.androidtv/gamepad',
   );
 
   static Future<dynamic> Function(MethodCall)? _buttonHandler;

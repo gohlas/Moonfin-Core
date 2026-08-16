@@ -9,7 +9,7 @@ for arg in "$@"; do
 done
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-APP_NAME="Moonfin"
+APP_NAME="MoonLiz"
 APK_SOURCE="$REPO_ROOT/build/app/outputs/flutter-apk/app-mobile-release.apk"
 BUNDLE_SOURCE="$REPO_ROOT/build/app/outputs/bundle/mobileRelease/app-mobile-release.aab"
 TV_APK_SOURCE="$REPO_ROOT/build/app/outputs/flutter-apk/app-androidtv-release.apk"
@@ -138,7 +138,7 @@ echo "Building Android TV release APK..."
   --flavor androidTv \
   --build-name "$TV_VERSION" \
   --build-number "$TV_BUILD_NUMBER" \
-  --dart-define=MOONFIN_FORCE_TV=true \
+  --dart-define=MOONLIZ_FORCE_TV=true \
   --dart-define=DISTRIBUTION_CHANNEL=android_tv_apk
 
 if [ ! -f "$TV_APK_SOURCE" ]; then
@@ -164,7 +164,7 @@ else
     --flavor androidTv \
     --build-name "$TV_VERSION" \
     --build-number "$TV_BUILD_NUMBER" \
-    --dart-define=MOONFIN_FORCE_TV=true \
+    --dart-define=MOONLIZ_FORCE_TV=true \
     --dart-define=DISTRIBUTION_CHANNEL=android_tv_aab; then
     echo "Flutter appbundle build failed. Retrying with Gradle bundleAndroidTvRelease fallback..."
     (

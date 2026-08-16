@@ -56,7 +56,7 @@ class PlatformDetection {
       _isTv ||
       isTizen ||
       isAppleTV ||
-      const bool.fromEnvironment('MOONFIN_FORCE_TV');
+      const bool.fromEnvironment('MOONLIZ_FORCE_TV');
   static bool _isTv = false;
   static void setTvMode(bool value) => _isTv = value;
 

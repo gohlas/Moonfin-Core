@@ -1,4 +1,4 @@
-package org.moonfin.androidtv
+package org.moonliz.androidtv
 
 import android.media.AudioAttributes
 import android.media.AudioFormat
@@ -224,7 +224,7 @@ class LibretroBridge(flutterEngine: FlutterEngine) {
         if (read < frames) Thread.sleep(2)
       }
     }
-    thread.name = "moonfin.game.audio"
+    thread.name = "moonliz.game.audio"
     audioThread = thread
     thread.start()
   }
@@ -339,7 +339,7 @@ class LibretroBridge(flutterEngine: FlutterEngine) {
 
   companion object {
     init {
-      System.loadLibrary("moonfin_libretro")
+      System.loadLibrary("moonliz_libretro")
     }
   }
 }

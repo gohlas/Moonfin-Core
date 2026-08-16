@@ -1,4 +1,4 @@
-package org.moonfin.androidtv
+package org.moonliz.androidtv
 
 import android.media.MediaCodecInfo
 import android.media.MediaCodecInfo.CodecProfileLevel

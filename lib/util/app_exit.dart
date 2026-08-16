@@ -8,7 +8,7 @@ import 'platform_detection.dart';
 
 class AppExit {
   static const MethodChannel _platformChannel = MethodChannel(
-    'org.moonfin.androidtv/platform',
+    'org.moonliz.androidtv/platform',
   );
 
   static const MethodChannel _appleTvSystemChannel = MethodChannel(

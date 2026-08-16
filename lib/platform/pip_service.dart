@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import '../util/platform_detection.dart';
 
 class PipService {
-  static const _androidChannel = MethodChannel('org.moonfin.androidtv/pip');
+  static const _androidChannel = MethodChannel('org.moonliz.androidtv/pip');
   static const _iosChannel = MethodChannel('org.moonfin.ios/pip');
 
   MethodChannel? get _activeChannel {

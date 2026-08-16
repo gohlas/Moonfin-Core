@@ -1,4 +1,4 @@
-package org.moonfin.androidtv
+package org.moonliz.androidtv
 
 import android.content.Context
 import android.content.Intent
@@ -13,8 +13,8 @@ import java.util.concurrent.Executors
 class WatchNextPublisher(private val context: Context) {
 
     companion object {
-        const val EXTRA_ITEM_ID = "org.moonfin.androidtv.watchnext.ITEM_ID"
-        const val EXTRA_SERVER_ID = "org.moonfin.androidtv.watchnext.SERVER_ID"
+        const val EXTRA_ITEM_ID = "org.moonliz.androidtv.watchnext.ITEM_ID"
+        const val EXTRA_SERVER_ID = "org.moonliz.androidtv.watchnext.SERVER_ID"
     }
 
     private val io = Executors.newSingleThreadExecutor()

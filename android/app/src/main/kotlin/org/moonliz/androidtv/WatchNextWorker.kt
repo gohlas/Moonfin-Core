@@ -1,4 +1,4 @@
-package org.moonfin.androidtv
+package org.moonliz.androidtv
 
 import android.content.Context
 import android.os.Build
@@ -133,7 +133,7 @@ class WatchNextWorker(
         if (runAttemptCount >= MAX_RETRY_ATTEMPTS) Result.failure() else Result.retry()
 
     companion object {
-        const val CHANNEL = "org.moonfin.androidtv/watch_next"
+        const val CHANNEL = "org.moonliz.androidtv/watch_next"
         private const val UNIQUE_NAME = "watch_next_refresh"
         private const val TIMEOUT_MS = 90_000L
         private const val MAX_RETRY_ATTEMPTS = 3
