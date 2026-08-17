@@ -1,0 +1,77 @@
+name: Build Android + Android TV (Manual)
+
+# Manual-only: builds the Android (mobile) and Android TV APKs on demand via the
+# "Run workflow" button in the Actions tab. No automatic triggers.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  FLUTTER_VERSION: '3.44.1'
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+
+      - name: Set up signing
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          STORE_TYPE: ${{ secrets.ANDROID_KEYSTORE_TYPE }}
+          STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          # On PRs from forks the signing secrets are not available. Skip signing
+          # setup so Gradle falls back to debug signing and the build still runs.
+          if [ -z "$ANDROID_KEYSTORE_BASE64" ]; then
+            echo "No Android keystore secret; skipping release signing (debug-signed build)."
+            exit 0
+          fi
+
+          # Use printf (not echo) to avoid adding a trailing newline that can corrupt binary decode on some shells.
+          printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 --decode > android/app/release.keystore
+
+          cat > android/keystore.properties <<EOF
+          storeFile=../release.keystore
+          storeType=$STORE_TYPE
+          storePassword=$STORE_PASSWORD
+          keyAlias=$KEY_ALIAS
+          keyPassword=$KEY_PASSWORD
+          EOF
+
+          # Fail fast with a clearer error if the keystore secret or type is wrong.
+          if [ -n "$STORE_TYPE" ]; then
+            keytool -list -v -keystore android/app/release.keystore -storetype "$STORE_TYPE" -storepass "$STORE_PASSWORD" >/dev/null
+          else
+            keytool -list -v -keystore android/app/release.keystore -storepass "$STORE_PASSWORD" >/dev/null
+          fi
+
+      - name: Build APKs
+        run: |
+          chmod +x build-android.sh
+          ./build-android.sh --apk-only
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: moonfin-android-apk
+          path: Moonfin_Android_v*.apk
+          if-no-files-found: error
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: moonfin-androidtv-apk
+          path: Moonfin_AndroidTV_v*.apk
+          if-no-files-found: error

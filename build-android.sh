@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+APK_ONLY=0
+for arg in "$@"; do
+  case "$arg" in
+    --apk-only) APK_ONLY=1 ;;
+  esac
+done
+
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 APP_NAME="Moonfin"
 APK_SOURCE="$REPO_ROOT/build/app/outputs/flutter-apk/app-mobile-release.apk"
@@ -94,33 +101,37 @@ fi
 echo "APK created: $APK_SOURCE"
 echo "APK copied to root: $APK_OUTPUT"
 
-echo "Building Android App Bundle..."
-if ! "$FLUTTER" build appbundle --release \
-  --flavor mobile \
-  --build-name "$APP_VERSION" \
-  --build-number "$APP_BUILD_NUMBER" \
-  --dart-define=DISTRIBUTION_CHANNEL=aab; then
-  echo "Flutter appbundle build failed. Retrying with Gradle bundleRelease fallback..."
-  (
-    cd "$REPO_ROOT/android"
-    ./gradlew bundleMobileRelease
-  )
+if [ "$APK_ONLY" -eq 1 ]; then
+  echo "Skipping Android App Bundle build (--apk-only)."
+else
+  echo "Building Android App Bundle..."
+  if ! "$FLUTTER" build appbundle --release \
+    --flavor mobile \
+    --build-name "$APP_VERSION" \
+    --build-number "$APP_BUILD_NUMBER" \
+    --dart-define=DISTRIBUTION_CHANNEL=aab; then
+    echo "Flutter appbundle build failed. Retrying with Gradle bundleRelease fallback..."
+    (
+      cd "$REPO_ROOT/android"
+      ./gradlew bundleMobileRelease
+    )
+  fi
+
+  if [ ! -f "$BUNDLE_SOURCE" ]; then
+    echo "Error: App Bundle not found at $BUNDLE_SOURCE" >&2
+    exit 1
+  fi
+
+  cp "$BUNDLE_SOURCE" "$BUNDLE_OUTPUT"
+
+  if [ -x "$PAGE_SIZE_CHECKER" ]; then
+    echo "Running 16 KB page-size compatibility check on App Bundle..."
+    "$PAGE_SIZE_CHECKER" "$BUNDLE_SOURCE"
+  fi
+
+  echo "App Bundle created: $BUNDLE_SOURCE"
+  echo "App Bundle copied to root: $BUNDLE_OUTPUT"
 fi
-
-if [ ! -f "$BUNDLE_SOURCE" ]; then
-  echo "Error: App Bundle not found at $BUNDLE_SOURCE" >&2
-  exit 1
-fi
-
-cp "$BUNDLE_SOURCE" "$BUNDLE_OUTPUT"
-
-if [ -x "$PAGE_SIZE_CHECKER" ]; then
-  echo "Running 16 KB page-size compatibility check on App Bundle..."
-  "$PAGE_SIZE_CHECKER" "$BUNDLE_SOURCE"
-fi
-
-echo "App Bundle created: $BUNDLE_SOURCE"
-echo "App Bundle copied to root: $BUNDLE_OUTPUT"
 
 echo "Building Android TV release APK..."
 "$FLUTTER" build apk --release \
@@ -145,31 +156,35 @@ fi
 echo "TV APK created: $TV_APK_SOURCE"
 echo "TV APK copied to root: $TV_APK_OUTPUT"
 
-echo "Building Android TV App Bundle..."
-if ! "$FLUTTER" build appbundle --release \
-  --flavor androidTv \
-  --build-name "$TV_VERSION" \
-  --build-number "$TV_BUILD_NUMBER" \
-  --dart-define=MOONFIN_FORCE_TV=true \
-  --dart-define=DISTRIBUTION_CHANNEL=android_tv_aab; then
-  echo "Flutter appbundle build failed. Retrying with Gradle bundleAndroidTvRelease fallback..."
-  (
-    cd "$REPO_ROOT/android"
-    ./gradlew bundleAndroidTvRelease
-  )
+if [ "$APK_ONLY" -eq 1 ]; then
+  echo "Skipping Android TV App Bundle build (--apk-only)."
+else
+  echo "Building Android TV App Bundle..."
+  if ! "$FLUTTER" build appbundle --release \
+    --flavor androidTv \
+    --build-name "$TV_VERSION" \
+    --build-number "$TV_BUILD_NUMBER" \
+    --dart-define=MOONFIN_FORCE_TV=true \
+    --dart-define=DISTRIBUTION_CHANNEL=android_tv_aab; then
+    echo "Flutter appbundle build failed. Retrying with Gradle bundleAndroidTvRelease fallback..."
+    (
+      cd "$REPO_ROOT/android"
+      ./gradlew bundleAndroidTvRelease
+    )
+  fi
+
+  if [ ! -f "$TV_BUNDLE_SOURCE" ]; then
+    echo "Error: TV App Bundle not found at $TV_BUNDLE_SOURCE" >&2
+    exit 1
+  fi
+
+  cp "$TV_BUNDLE_SOURCE" "$TV_BUNDLE_OUTPUT"
+
+  if [ -x "$PAGE_SIZE_CHECKER" ]; then
+    echo "Running 16 KB page-size compatibility check on TV App Bundle..."
+    "$PAGE_SIZE_CHECKER" "$TV_BUNDLE_SOURCE"
+  fi
+
+  echo "TV App Bundle created: $TV_BUNDLE_SOURCE"
+  echo "TV App Bundle copied to root: $TV_BUNDLE_OUTPUT"
 fi
-
-if [ ! -f "$TV_BUNDLE_SOURCE" ]; then
-  echo "Error: TV App Bundle not found at $TV_BUNDLE_SOURCE" >&2
-  exit 1
-fi
-
-cp "$TV_BUNDLE_SOURCE" "$TV_BUNDLE_OUTPUT"
-
-if [ -x "$PAGE_SIZE_CHECKER" ]; then
-  echo "Running 16 KB page-size compatibility check on TV App Bundle..."
-  "$PAGE_SIZE_CHECKER" "$TV_BUNDLE_SOURCE"
-fi
-
-echo "TV App Bundle created: $TV_BUNDLE_SOURCE"
-echo "TV App Bundle copied to root: $TV_BUNDLE_OUTPUT"
