@@ -1874,6 +1874,19 @@ class AppLocalizationsFa extends AppLocalizations {
   String get unableToCreateRecording => 'امکان ایجاد ضبط وجود ندارد';
 
   @override
+  String get recordSeries => 'Record Series';
+
+  @override
+  String get seriesSetToRecord => 'Series set to record';
+
+  @override
+  String get seriesRecordingCancelled => 'Series recording cancelled';
+
+  @override
+  String get unableToCreateSeriesRecording =>
+      'Unable to create series recording';
+
+  @override
   String get watch => 'تماشا';
 
   @override
@@ -2414,6 +2427,13 @@ class AppLocalizationsFa extends AppLocalizations {
   @override
   String get osdLockButtonDescription =>
       'دکمه قفلی را نشان دهید که ورودی لمسی را تا فشار طولانی مسدود می‌کند';
+
+  @override
+  String get playerSwipeGestures => 'Volume and Brightness Swipes';
+
+  @override
+  String get playerSwipeGesturesDescription =>
+      'Slide up or down on the player to change brightness on the left and volume on the right';
 
   @override
   String get osdButtons => 'Player Buttons';
@@ -3360,6 +3380,12 @@ class AppLocalizationsFa extends AppLocalizations {
   String get contentType => 'نوع محتوا';
 
   @override
+  String get mediaBarSourceType => 'Source';
+
+  @override
+  String get mediaBarSourceRandom => 'Random';
+
+  @override
   String get moviesAndTvShows => 'فیلم‌ها و نمایش‌های تلویزیونی';
 
   @override
@@ -3456,6 +3482,9 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get liveTV => 'تلویزیون زنده';
+
+  @override
+  String get favoriteChannels => 'Favorite Channels';
 
   @override
   String get homeSections => 'بخش های صفحه اصلی';
@@ -10526,6 +10555,9 @@ class AppLocalizationsFa extends AppLocalizations {
   String get personalRatingRated => 'Rated';
 
   @override
+  String get personalRatingMine => 'My Rating';
+
+  @override
   String get personalRatingSaveFailed => 'Could not save rating';
 
   @override
@@ -10543,4 +10575,69 @@ class AppLocalizationsFa extends AppLocalizations {
   String personalRatingOutOfFive(String rating) {
     return '$rating / 5';
   }
+
+  @override
+  String get filterInProgress => 'In Progress';
+
+  @override
+  String get filterUnreleased => 'Unreleased';
+
+  @override
+  String get filterTrailers => 'Trailers';
+
+  @override
+  String get filterExtras => 'Extras';
+
+  @override
+  String get filterThemeSongs => 'Theme Songs';
+
+  @override
+  String get filterThemeVideos => 'Theme Videos';
+
+  @override
+  String get source => 'Source';
+
+  @override
+  String get years => 'Years';
+
+  @override
+  String get audioLanguage => 'Audio Language';
+
+  @override
+  String get subtitleLanguage => 'Subtitle Language';
+
+  @override
+  String get clearFilters => 'Clear Filters';
+
+  @override
+  String get seerrShortcutsRow => 'Seerr Browse';
+
+  @override
+  String get seerrReleased => 'Released';
+
+  @override
+  String get seerrMinRating => 'Minimum Rating';
+
+  @override
+  String get seerrMinVotes => 'Minimum Votes';
+
+  @override
+  String get seerrOriginalLanguage => 'Original Language';
+
+  @override
+  String get seerrRuntime => 'Runtime';
+
+  @override
+  String get subtitleHdrSeparate => 'Separate HDR Style';
+
+  @override
+  String get subtitleHdrSeparateSubtitle =>
+      'White is much brighter in HDR than in SDR, so a dimmer style here avoids the glare';
+
+  @override
+  String get scrollSensitivity => 'Scroll Sensitivity';
+
+  @override
+  String get scrollSensitivitySubtitle =>
+      'How far one mouse wheel notch scrolls';
 }

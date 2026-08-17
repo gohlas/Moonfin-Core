@@ -566,6 +566,12 @@ List<_SettingsSearchEntry> _buildSettingsSearchIndex({
       'scaling',
     ]),
     style.leaf(
+      'pref_desktop_scroll_sensitivity',
+      l10n.scrollSensitivity,
+      subtitle: l10n.scrollSensitivitySubtitle,
+      keywords: ['mouse', 'wheel', 'speed', 'scrolling'],
+    ),
+    style.leaf(
       'pref_show_backdrop',
       l10n.backgroundBackdrops,
       subtitle: l10n.showBackdropImages,
@@ -956,6 +962,12 @@ List<_SettingsSearchEntry> _buildSettingsSearchIndex({
       'movies',
       'shows',
     ]),
+    mediaBar.leaf('mediaBarSourceType', l10n.mediaBarSourceType, keywords: [
+      'random',
+      'recently added',
+      'recently released',
+      'newest',
+    ]),
     mediaBar.leaf('mediaBarItemCount', l10n.itemCount),
     mediaBar.leaf('mediaBarLibraryIds', l10n.sourceLibraries),
     mediaBar.leaf('mediaBarCollectionIds', l10n.sourceCollections),
@@ -1093,13 +1105,20 @@ List<_SettingsSearchEntry> _buildSettingsSearchIndex({
     video.leaf('skipForwardLength', l10n.skipForwardLength, keywords: [
       'seek forward',
     ]),
-    if (PlatformDetection.useMobileUi)
+    if (PlatformDetection.useMobileUi) ...[
       video.leaf(
         'osdLockEnabled',
         l10n.osdLockButton,
         subtitle: l10n.osdLockButtonDescription,
         keywords: ['lock controls'],
       ),
+      video.leaf(
+        'playerSwipeGestures',
+        l10n.playerSwipeGestures,
+        subtitle: l10n.playerSwipeGesturesDescription,
+        keywords: ['swipe', 'gestures', 'volume', 'brightness'],
+      ),
+    ],
     osdButtons.screen(keywords: [
       'player buttons',
       'hide',

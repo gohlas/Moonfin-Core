@@ -1895,6 +1895,19 @@ class AppLocalizationsNl extends AppLocalizations {
   String get unableToCreateRecording => 'Kan opname niet aanmaken';
 
   @override
+  String get recordSeries => 'Record Series';
+
+  @override
+  String get seriesSetToRecord => 'Series set to record';
+
+  @override
+  String get seriesRecordingCancelled => 'Series recording cancelled';
+
+  @override
+  String get unableToCreateSeriesRecording =>
+      'Unable to create series recording';
+
+  @override
   String get watch => 'Kijken';
 
   @override
@@ -2442,6 +2455,13 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String get osdLockButtonDescription =>
       'Toon een vergrendelknop die aanraakinvoer blokkeert totdat deze lang wordt ingedrukt';
+
+  @override
+  String get playerSwipeGestures => 'Volume and Brightness Swipes';
+
+  @override
+  String get playerSwipeGesturesDescription =>
+      'Slide up or down on the player to change brightness on the left and volume on the right';
 
   @override
   String get osdButtons => 'Afspeelknoppen';
@@ -3400,6 +3420,12 @@ class AppLocalizationsNl extends AppLocalizations {
   String get contentType => 'Inhoudstype';
 
   @override
+  String get mediaBarSourceType => 'Source';
+
+  @override
+  String get mediaBarSourceRandom => 'Random';
+
+  @override
   String get moviesAndTvShows => 'Films en tv-programma\'s';
 
   @override
@@ -3496,6 +3522,9 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get liveTV => 'Live-tv';
+
+  @override
+  String get favoriteChannels => 'Favorite Channels';
 
   @override
   String get homeSections => 'Homesecties';
@@ -4165,7 +4194,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get seerrSeriesContinuing =>
-      'Series Continuing · Future Seasons Can Be Requested';
+      'Serie gaat verder - Toekomstige seizoenen kunnen aangevraagd worden';
 
   @override
   String get advancedOptions => 'Geavanceerde opties';
@@ -8774,11 +8803,12 @@ class AppLocalizationsNl extends AppLocalizations {
   String get settingsNone => 'Geen';
 
   @override
-  String get settingsSkipButtonAutoHide => 'Auto Hide Skip Button';
+  String get settingsSkipButtonAutoHide =>
+      'Verberg automatisch de overslaanknop';
 
   @override
   String get settingsSkipButtonAutoHideDescription =>
-      'Automatically dismiss the skip intro and outro button after a few seconds.';
+      'Haal automatisch de knop om het intro en outro over te slaan weg na een paar seconde.';
 
   @override
   String get settingsPromptUser => 'Vraag gebruiker';
@@ -8853,8 +8883,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get settingsEnabledOnThisDevice => 'Ingeschakeld op dit apparaat';
 
   @override
-  String get settingsDisabledPreferTranscode =>
-      'Uitgeschakeld (voorkeur voor transcoderen)';
+  String get settingsDisabledPreferTranscode => 'Uitgeschakeld';
 
   @override
   String get settingsResumeRewindDescription =>
@@ -9063,7 +9092,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get mapDolbyVisionP7Subtitle =>
-      'Speel Dolby Vision profiel 7-streams af als HDR10-compatibele HEVC op apparaten zonder Dolby Vision.';
+      'Sla de profiel 8 conversie over en haal het Dolby Vision profiel 7 op uit streams naar een HDR10-bruikbare HEVC. Gebruik deze optie als omgezette streams er vreemd uitzien.';
 
   @override
   String get subtitlesUseEmbeddedStyles =>
@@ -10622,40 +10651,43 @@ class AppLocalizationsNl extends AppLocalizations {
   String get showAlphabeticalFilters => 'Laat alfabet zien';
 
   @override
-  String get personalRatingStyle => 'Personal rating style';
+  String get personalRatingStyle => 'Persoonlijke beoordelingsstijl';
 
   @override
-  String get personalRatingThumbs => 'Like / dislike';
+  String get personalRatingThumbs => 'Vind ik (niet) leuk';
 
   @override
-  String get personalRatingStars => '5 stars';
+  String get personalRatingStars => '5 sterren';
 
   @override
-  String get personalRatingNumeric => 'Numeric score out of 10';
+  String get personalRatingNumeric => 'Getalscore tot 10';
 
   @override
-  String get rate => 'Rate';
+  String get rate => 'Beoordeel';
 
   @override
-  String get like => 'Like';
+  String get like => 'Vind ik leuk';
 
   @override
-  String get dislike => 'Dislike';
+  String get dislike => 'Vind ik niet leuk';
 
   @override
-  String get personalRatingClear => 'Clear rating';
+  String get personalRatingClear => 'Haal beoordeling weg';
 
   @override
-  String get personalRatingRated => 'Rated';
+  String get personalRatingRated => 'Beoordeeld';
 
   @override
-  String get personalRatingSaveFailed => 'Could not save rating';
+  String get personalRatingMine => 'My Rating';
 
   @override
-  String get increase => 'Increase';
+  String get personalRatingSaveFailed => 'Kon de beoordeling niet opslaan';
 
   @override
-  String get decrease => 'Decrease';
+  String get increase => 'Verhoog';
+
+  @override
+  String get decrease => 'Verlaag';
 
   @override
   String personalRatingOutOfTen(String rating) {
@@ -10666,4 +10698,69 @@ class AppLocalizationsNl extends AppLocalizations {
   String personalRatingOutOfFive(String rating) {
     return '$rating / 5';
   }
+
+  @override
+  String get filterInProgress => 'In Progress';
+
+  @override
+  String get filterUnreleased => 'Unreleased';
+
+  @override
+  String get filterTrailers => 'Trailers';
+
+  @override
+  String get filterExtras => 'Extras';
+
+  @override
+  String get filterThemeSongs => 'Theme Songs';
+
+  @override
+  String get filterThemeVideos => 'Theme Videos';
+
+  @override
+  String get source => 'Source';
+
+  @override
+  String get years => 'Years';
+
+  @override
+  String get audioLanguage => 'Audio Language';
+
+  @override
+  String get subtitleLanguage => 'Subtitle Language';
+
+  @override
+  String get clearFilters => 'Clear Filters';
+
+  @override
+  String get seerrShortcutsRow => 'Seerr Browse';
+
+  @override
+  String get seerrReleased => 'Released';
+
+  @override
+  String get seerrMinRating => 'Minimum Rating';
+
+  @override
+  String get seerrMinVotes => 'Minimum Votes';
+
+  @override
+  String get seerrOriginalLanguage => 'Original Language';
+
+  @override
+  String get seerrRuntime => 'Runtime';
+
+  @override
+  String get subtitleHdrSeparate => 'Separate HDR Style';
+
+  @override
+  String get subtitleHdrSeparateSubtitle =>
+      'White is much brighter in HDR than in SDR, so a dimmer style here avoids the glare';
+
+  @override
+  String get scrollSensitivity => 'Scroll Sensitivity';
+
+  @override
+  String get scrollSensitivitySubtitle =>
+      'How far one mouse wheel notch scrolls';
 }

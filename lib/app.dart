@@ -581,6 +581,7 @@ class _GlobalShortcutScopeState extends State<_GlobalShortcutScope>
       return true;
     }
     if (DialogBackSuppressor.consume()) return true;
+    if (CustomTVTextField.closeTopKeyboard()) return true;
     if (OverlaySheetController.closeTopSheet()) return true;
     if (InlineBackInterceptor.handleBack()) return true;
     if (_isPlayerRoute()) return false;
@@ -649,6 +650,9 @@ class _GlobalShortcutScopeState extends State<_GlobalShortcutScope>
       // key handling of its own, so without it the route pops out from under
       // an open keyboard.
       if (CustomTVTextField.closeTopKeyboard()) {
+        if (PlatformDetection.isAndroid && key == LogicalKeyboardKey.goBack) {
+          DialogBackSuppressor.markDismissed();
+        }
         return true;
       }
       if (OverlaySheetController.closeTopSheet()) {
@@ -795,9 +799,12 @@ class _GlobalShortcutScopeState extends State<_GlobalShortcutScope>
     try {
       final prefs = GetIt.instance<UserPreferences>();
       final isFullScreen = await windowManager.isFullScreen();
+      final isMaximized = await windowManager.isMaximized();
       await prefs.set(UserPreferences.windowFullscreen, isFullScreen);
-      // Keep the last windowed bounds; don't save fullscreen size as the window size.
-      if (isFullScreen) return;
+      await prefs.set(UserPreferences.windowMaximized, isMaximized);
+      // Keep the last windowed bounds. Neither state reports the size the
+      // window would return to, so saving either would lose the real one.
+      if (isFullScreen || isMaximized) return;
       final size = await windowManager.getSize();
       final pos = await windowManager.getPosition();
       await prefs.set(UserPreferences.windowWidth, size.width);
@@ -820,6 +827,8 @@ class _GlobalShortcutScopeState extends State<_GlobalShortcutScope>
         eventName == 'resize' ||
         eventName == 'moved' ||
         eventName == 'resized' ||
+        eventName == 'maximize' ||
+        eventName == 'unmaximize' ||
         eventName == 'enter-full-screen' ||
         eventName == 'leave-full-screen') {
       _scheduleSaveGeometry();
@@ -865,15 +874,7 @@ class _GlobalShortcutScopeState extends State<_GlobalShortcutScope>
         keys.contains(LogicalKeyboardKey.altRight);
 
     if ((key == LogicalKeyboardKey.enter || key == LogicalKeyboardKey.select) && !altPressed) {
-      final targetContext =
-          FocusManager.instance.primaryFocus?.context ?? context;
-      final activated = Actions.maybeInvoke(
-        targetContext,
-        const ActivateIntent(),
-      );
-      return activated == null
-          ? KeyEventResult.ignored
-          : KeyEventResult.handled;
+      return activateFocusedTarget(context);
     }
 
     return KeyEventResult.ignored;

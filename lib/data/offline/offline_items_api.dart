@@ -304,6 +304,19 @@ class OfflineItemsApi implements ItemsApi {
     String? maxOfficialRating,
     bool? hasParentalRating,
     String? anyProviderIdEquals,
+    List<String>? officialRatings,
+    List<int>? years,
+    List<String>? videoTypes,
+    List<String>? audioLanguages,
+    List<String>? subtitleLanguages,
+    bool? hasSubtitles,
+    bool? hasTrailer,
+    bool? hasSpecialFeature,
+    bool? hasThemeSong,
+    bool? hasThemeVideo,
+    bool? isHd,
+    bool? is4K,
+    bool? is3D,
   }) async {
     List<OfflineEntry> result;
     if (ids != null && ids.isNotEmpty) {
@@ -400,6 +413,14 @@ class OfflineItemsApi implements ItemsApi {
     );
   }
 
+  /// Downloads carry no facet index, so the picker offers nothing rather than
+  /// a list the offline catalog cant honour.
+  @override
+  Future<QueryFilterValues> getQueryFilters({
+    String? parentId,
+    List<String>? includeItemTypes,
+  }) async => QueryFilterValues.empty;
+
   @override
   Future<Map<String, dynamic>> getPersons({
     required String searchTerm,
@@ -482,6 +503,7 @@ class OfflineItemsApi implements ItemsApi {
   Future<Map<String, dynamic>> getNextUp({
     String? seriesId,
     String? parentId,
+    int? startIndex,
     int? limit,
     String? fields,
     bool? enableResumable,
@@ -529,13 +551,18 @@ class OfflineItemsApi implements ItemsApi {
           DateTime.fromMillisecondsSinceEpoch(0);
       return bDate.compareTo(aDate);
     });
-    return _envelope(_materialize(nextUp), limit: limit);
+    return _envelope(
+      _materialize(nextUp),
+      startIndex: startIndex,
+      limit: limit,
+    );
   }
 
   @override
   Future<Map<String, dynamic>> getResumeItems({
     String? parentId,
     List<String>? includeItemTypes,
+    int? startIndex,
     int? limit,
     String? fields,
     String? enableImageTypes,
@@ -559,7 +586,11 @@ class OfflineItemsApi implements ItemsApi {
                 DateTime.fromMillisecondsSinceEpoch(0);
             return bDate.compareTo(aDate);
           });
-    return _envelope(_materialize(resumable), limit: limit);
+    return _envelope(
+      _materialize(resumable),
+      startIndex: startIndex,
+      limit: limit,
+    );
   }
 
   @override

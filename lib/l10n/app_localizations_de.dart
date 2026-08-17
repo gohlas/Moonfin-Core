@@ -208,17 +208,17 @@ class AppLocalizationsDe extends AppLocalizations {
   String get glassQuality => 'Glass-Qualität';
 
   @override
-  String get oledMode => 'OLED Mode';
+  String get oledMode => 'OLED Modus';
 
   @override
   String get oledModeSubtitle =>
       'Deepen blacks and enrich artwork. Best on OLED displays.';
 
   @override
-  String get oledModeSubtle => 'Subtle';
+  String get oledModeSubtle => 'Subtil';
 
   @override
-  String get oledModeVivid => 'Vivid';
+  String get oledModeVivid => 'Lebhaft';
 
   @override
   String get glassQualitySubtitle =>
@@ -521,10 +521,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get extraLarge => 'Sehr groß';
 
   @override
-  String get scrollDirection => 'Scroll Direction';
+  String get scrollDirection => 'Scrollrichtung';
 
   @override
-  String get scrollDirectionVertical => 'Vertical';
+  String get scrollDirectionVertical => 'Vertikal';
 
   @override
   String get scrollDirectionHorizontal => 'Horizontal';
@@ -642,7 +642,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get scrollRight => 'Nach rechts scrollen';
 
   @override
-  String get scrollToTop => 'Scroll to top';
+  String get scrollToTop => 'Scroll nach oben';
 
   @override
   String get couldNotLoadGenre =>
@@ -1165,7 +1165,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get cast => 'Übertragen';
 
   @override
-  String get castMembers => 'Cast';
+  String get castMembers => 'Besetzung';
 
   @override
   String get trailer => 'Trailer';
@@ -1964,6 +1964,19 @@ class AppLocalizationsDe extends AppLocalizations {
   String get unableToCreateRecording => 'Aufnahme kann nicht erstellt werden';
 
   @override
+  String get recordSeries => 'Record Series';
+
+  @override
+  String get seriesSetToRecord => 'Series set to record';
+
+  @override
+  String get seriesRecordingCancelled => 'Series recording cancelled';
+
+  @override
+  String get unableToCreateSeriesRecording =>
+      'Unable to create series recording';
+
+  @override
   String get watch => 'Ansehen';
 
   @override
@@ -2513,6 +2526,13 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get osdLockButtonDescription =>
       'Sperrtaste anzeigen, die Touch-Eingaben blockiert, bis lange gedrückt wird';
+
+  @override
+  String get playerSwipeGestures => 'Volume and Brightness Swipes';
+
+  @override
+  String get playerSwipeGesturesDescription =>
+      'Slide up or down on the player to change brightness on the left and volume on the right';
 
   @override
   String get osdButtons => 'Player Buttons';
@@ -3470,6 +3490,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get contentType => 'Inhaltstyp';
 
   @override
+  String get mediaBarSourceType => 'Source';
+
+  @override
+  String get mediaBarSourceRandom => 'Random';
+
+  @override
   String get moviesAndTvShows => 'Filme & TV-Sendungen';
 
   @override
@@ -3569,6 +3595,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get liveTV => 'Live-TV';
+
+  @override
+  String get favoriteChannels => 'Favorite Channels';
 
   @override
   String get homeSections => 'Startseiten-Bereiche';
@@ -10743,6 +10772,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get personalRatingRated => 'Rated';
 
   @override
+  String get personalRatingMine => 'My Rating';
+
+  @override
   String get personalRatingSaveFailed => 'Could not save rating';
 
   @override
@@ -10760,4 +10792,69 @@ class AppLocalizationsDe extends AppLocalizations {
   String personalRatingOutOfFive(String rating) {
     return '$rating / 5';
   }
+
+  @override
+  String get filterInProgress => 'In Progress';
+
+  @override
+  String get filterUnreleased => 'Unreleased';
+
+  @override
+  String get filterTrailers => 'Trailers';
+
+  @override
+  String get filterExtras => 'Extras';
+
+  @override
+  String get filterThemeSongs => 'Theme Songs';
+
+  @override
+  String get filterThemeVideos => 'Theme Videos';
+
+  @override
+  String get source => 'Source';
+
+  @override
+  String get years => 'Years';
+
+  @override
+  String get audioLanguage => 'Audio Language';
+
+  @override
+  String get subtitleLanguage => 'Subtitle Language';
+
+  @override
+  String get clearFilters => 'Clear Filters';
+
+  @override
+  String get seerrShortcutsRow => 'Seerr Browse';
+
+  @override
+  String get seerrReleased => 'Released';
+
+  @override
+  String get seerrMinRating => 'Minimum Rating';
+
+  @override
+  String get seerrMinVotes => 'Minimum Votes';
+
+  @override
+  String get seerrOriginalLanguage => 'Original Language';
+
+  @override
+  String get seerrRuntime => 'Runtime';
+
+  @override
+  String get subtitleHdrSeparate => 'Separate HDR Style';
+
+  @override
+  String get subtitleHdrSeparateSubtitle =>
+      'White is much brighter in HDR than in SDR, so a dimmer style here avoids the glare';
+
+  @override
+  String get scrollSensitivity => 'Scroll Sensitivity';
+
+  @override
+  String get scrollSensitivitySubtitle =>
+      'How far one mouse wheel notch scrolls';
 }

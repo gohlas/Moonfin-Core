@@ -34,6 +34,7 @@ import '../../../util/platform_detection.dart';
 import '../../../util/server_url.dart';
 import '../../../preference/seerr_preferences.dart';
 import '../../../data/viewmodels/seerr_discover_view_model.dart';
+import '../../widgets/seerr/seerr_shortcuts.dart';
 import '../../../data/services/custom_external_lists_service.dart';
 
 class HomeViewModel extends ChangeNotifier {
@@ -49,6 +50,10 @@ class HomeViewModel extends ChangeNotifier {
   final HomeRowCacheStore _cacheStore = HomeRowCacheStore();
   final Set<String> _inFlightPagingRowIds = {};
   final Map<String, int> _rowOffsets = {};
+
+  /// How many items a row asks for per page, matching what RowDataSource
+  /// requests so the offsets tracked here stay in step with it.
+  static const _rowPageSize = 15;
 
   final TopShelfService _topShelf = TopShelfService();
   final WatchNextService _watchNext = WatchNextService();
@@ -177,7 +182,8 @@ class HomeViewModel extends ChangeNotifier {
   }
 
   static bool _isSeerrSectionType(HomeSectionType type) {
-    return type == HomeSectionType.seerrRecentRequests ||
+    return type == HomeSectionType.seerrShortcuts ||
+        type == HomeSectionType.seerrRecentRequests ||
         type == HomeSectionType.seerrWatchlist ||
         type == HomeSectionType.seerrRecentlyAdded ||
         type == HomeSectionType.seerrPopularMovies ||
@@ -712,6 +718,8 @@ class HomeViewModel extends ChangeNotifier {
             row.rowType == HomeRowType.liveTvOnNow;
       case HomeSectionType.activeRecordings:
         return row.rowType == HomeRowType.activeRecordings;
+      case HomeSectionType.seerrShortcuts:
+        return row.id == 'seerr_shortcuts';
       case HomeSectionType.seerrRecentRequests:
         return row.id == 'seerr_recent_requests';
       case HomeSectionType.seerrWatchlist:
@@ -889,6 +897,15 @@ class HomeViewModel extends ChangeNotifier {
         return;
       }
 
+      // The aggregated multi-server rows take no offset, so they keep the
+      // paging they already had.
+      if (row.id == 'resume' &&
+          !_multiServerEnabled &&
+          _prefs.get(UserPreferences.mergeContinueWatchingNextUp)) {
+        await _loadMoreMergedResume(rowIndex);
+        return;
+      }
+
       final int currentOffset = _rowOffsets[row.id] ?? row.items.length;
       final (List<AggregatedItem> items, int totalCount) result;
       if (_multiServerEnabled && !row.id.startsWith('pluginDynamic:')) {
@@ -900,7 +917,7 @@ class HomeViewModel extends ChangeNotifier {
           offset: currentOffset,
         );
       }
-      _rowOffsets[row.id] = currentOffset + 15;
+      _rowOffsets[row.id] = currentOffset + _rowPageSize;
 
       final filteredItems = _filterEmptyElements(result.$1);
       final newTotalCount = filteredItems.length <= row.items.length
@@ -1003,6 +1020,8 @@ class HomeViewModel extends ChangeNotifier {
         return const {'studios'};
       case HomeSectionType.activeRecordings:
         return const {'activeRecordings'};
+      case HomeSectionType.seerrShortcuts:
+        return const {'seerrShortcuts'};
       case HomeSectionType.seerrRecentRequests:
         return const {'seerrRecentRequests'};
       case HomeSectionType.seerrWatchlist:
@@ -1326,6 +1345,8 @@ class HomeViewModel extends ChangeNotifier {
         try {
           final onNow = await _dataSource.loadOnNow(_serverId);
           if (onNow.items.isNotEmpty) rows.add(onNow);
+          final favorites = await _dataSource.loadFavoritesChannels(_serverId);
+          if (favorites.items.isNotEmpty) rows.add(favorites);
         } catch (_) {}
         return rows;
       case HomeSectionType.activeRecordings:
@@ -1339,6 +1360,8 @@ class HomeViewModel extends ChangeNotifier {
       case HomeSectionType.mediaBar:
         _mediaBarViewModel.load();
         return [];
+      case HomeSectionType.seerrShortcuts:
+        return [await _loadSeerrShortcutsRow(l10n)];
       case HomeSectionType.seerrRecentRequests:
         return _loadSeerrRow(
           SeerrRowType.recentRequests,
@@ -1796,6 +1819,8 @@ class HomeViewModel extends ChangeNotifier {
           rowType: HomeRowType.pluginDynamic,
           isLoading: true,
         );
+      case HomeSectionType.seerrShortcuts:
+        return _seerrShortcutsRow(l10n);
       case HomeSectionType.seerrTrending:
         return HomeRow(
           id: 'seerr_trending',
@@ -2054,60 +2079,26 @@ class HomeViewModel extends ChangeNotifier {
     _bgMergeInFlight = true;
     return () async {
       try {
+        // Fetched side by side but tolerated separately. A server that is
+        // slow to answer one of these must not take the other down with it,
+        // which would leave the merged row empty and drop it from the home
+        // screen.
         if (_multiServerEnabled) {
-          final resumeFuture = _multiServerRepo.getAggregatedResume();
-          final nextUpFuture = () async {
-            try {
-              return await _multiServerRepo.getAggregatedNextUp();
-            } catch (_) {
-              return null;
-            }
-          }();
-          final resumeRow = await resumeFuture;
-          final nextUpRow = await nextUpFuture;
-          final filteredResume = _prefs.filterContinueWatching(resumeRow.items);
-          final filteredNextUp = _prefs.filterNextUp(nextUpRow?.items ?? []);
-          final mergedItemsMap = <String, AggregatedItem>{};
-          for (final item in filteredResume) {
-            mergedItemsMap[item.id] = item;
-          }
-          for (final item in filteredNextUp) {
-            mergedItemsMap.putIfAbsent(item.id, () => item);
-          }
-          int byLastPlayedDate(AggregatedItem a, AggregatedItem b) {
-            final aDate =
-                a.rawData['UserData']?['LastPlayedDate'] as String? ?? '';
-            final bDate =
-                b.rawData['UserData']?['LastPlayedDate'] as String? ?? '';
-            return bDate.compareTo(aDate);
-          }
-
-          final sorted = mergedItemsMap.values.toList()..sort(byLastPlayedDate);
-          _applyMergedResumeResult(sorted);
+          final resumeFuture = _loadRowOrNull(
+            () => _multiServerRepo.getAggregatedResume(),
+          );
+          final nextUpFuture = _loadRowOrNull(
+            () => _multiServerRepo.getAggregatedNextUp(),
+          );
+          _applyMergedResumeRows(await resumeFuture, await nextUpFuture);
         } else {
-          final results = await Future.wait([
-            _dataSource.loadResume(_serverId),
-            _dataSource.loadNextUp(_serverId),
-          ]);
-          final filteredResume = _prefs.filterContinueWatching(results[0].items);
-          final filteredNextUp = _prefs.filterNextUp(results[1].items);
-          final mergedItemsMap = <String, AggregatedItem>{};
-          for (final item in filteredResume) {
-            mergedItemsMap[item.id] = item;
-          }
-          for (final item in filteredNextUp) {
-            mergedItemsMap.putIfAbsent(item.id, () => item);
-          }
-          int byLastPlayedDate(AggregatedItem a, AggregatedItem b) {
-            final aDate =
-                a.rawData['UserData']?['LastPlayedDate'] as String? ?? '';
-            final bDate =
-                b.rawData['UserData']?['LastPlayedDate'] as String? ?? '';
-            return bDate.compareTo(aDate);
-          }
-
-          final sorted = mergedItemsMap.values.toList()..sort(byLastPlayedDate);
-          _applyMergedResumeResult(sorted);
+          final resumeFuture = _loadRowOrNull(
+            () => _dataSource.loadResume(_serverId),
+          );
+          final nextUpFuture = _loadRowOrNull(
+            () => _dataSource.loadNextUp(_serverId),
+          );
+          _applyMergedResumeRows(await resumeFuture, await nextUpFuture);
         }
       } catch (_) {
       } finally {
@@ -2116,7 +2107,53 @@ class HomeViewModel extends ChangeNotifier {
     }();
   }
 
-  void _applyMergedResumeResult(List<AggregatedItem> mergedItems) {
+  /// Newest first by when the user last played the item.
+  static int _byLastPlayedDate(AggregatedItem a, AggregatedItem b) {
+    final aDate = a.rawData['UserData']?['LastPlayedDate'] as String? ?? '';
+    final bDate = b.rawData['UserData']?['LastPlayedDate'] as String? ?? '';
+    return bDate.compareTo(aDate);
+  }
+
+  /// Returns null rather than throwing, so a caller merging several sources
+  /// can keep the ones that answered.
+  static Future<HomeRow?> _loadRowOrNull(
+    Future<HomeRow> Function() load,
+  ) async {
+    try {
+      return await load();
+    } catch (_) {
+      return null;
+    }
+  }
+
+  /// Merges a fresh first page of Continue Watching and Next Up into the
+  /// resume row. Resume items win the dedupe.
+  void _applyMergedResumeRows(HomeRow? resumeRow, HomeRow? nextUpRow) {
+    if (resumeRow == null && nextUpRow == null) return;
+    final merged = <String, AggregatedItem>{};
+    for (final item in _prefs.filterContinueWatching(
+      resumeRow?.items ?? const [],
+    )) {
+      merged[item.id] = item;
+    }
+    for (final item in _prefs.filterNextUp(nextUpRow?.items ?? const [])) {
+      merged.putIfAbsent(item.id, () => item);
+    }
+    final sorted = merged.values.toList()..sort(_byLastPlayedDate);
+    // Each source contributed its first page, and the merged item count can't
+    // stand in for a per source offset, so the paging cursor starts at one
+    // page no matter how many unique items the merge kept.
+    _rowOffsets['resume'] = _rowPageSize;
+    _applyMergedResumeResult(
+      sorted,
+      totalCount: (resumeRow?.totalCount ?? 0) + (nextUpRow?.totalCount ?? 0),
+    );
+  }
+
+  void _applyMergedResumeResult(
+    List<AggregatedItem> mergedItems, {
+    int? totalCount,
+  }) {
     final resumeIndex = _rows.indexWhere((r) => r.id == 'resume');
     if (resumeIndex < 0) return;
     _rows = List.of(_rows);
@@ -2126,11 +2163,56 @@ class HomeViewModel extends ChangeNotifier {
       _rows[resumeIndex] = _rows[resumeIndex].copyWith(
         items: mergedItems,
         isLoading: false,
+        totalCount: totalCount ?? _rows[resumeIndex].totalCount,
       );
     }
     notifyListeners();
     _watchNext.update(_rows);
     _tvChannels.update();
+  }
+
+  /// The merged row draws on two endpoints, so it pages both at the same offset
+  /// and merges the results in. Each source is walked in full and the dedupe
+  /// only drops what is already on screen, so nothing gets skipped. The counts
+  /// the two report overlap, so a page that adds nothing new closes the row.
+  Future<void> _loadMoreMergedResume(int rowIndex) async {
+    final row = _rows[rowIndex];
+    final offset = _rowOffsets[row.id] ?? row.items.length;
+
+    final resumeFuture = _loadRowOrNull(
+      () => _dataSource.loadResume(_serverId, startIndex: offset),
+    );
+    final nextUpFuture = _loadRowOrNull(
+      () => _dataSource.loadNextUp(_serverId, startIndex: offset),
+    );
+    final resumeRow = await resumeFuture;
+    final nextUpRow = await nextUpFuture;
+    if (resumeRow == null && nextUpRow == null) return;
+    _rowOffsets[row.id] = offset + _rowPageSize;
+
+    final merged = <String, AggregatedItem>{
+      for (final item in row.items) item.id: item,
+    };
+    final countBefore = merged.length;
+    for (final item in _prefs.filterContinueWatching(
+      resumeRow?.items ?? const [],
+    )) {
+      merged.putIfAbsent(item.id, () => item);
+    }
+    for (final item in _prefs.filterNextUp(nextUpRow?.items ?? const [])) {
+      merged.putIfAbsent(item.id, () => item);
+    }
+
+    final items = _filterEmptyElements(merged.values.toList())
+      ..sort(_byLastPlayedDate);
+    final index = _rows.indexWhere((r) => r.id == row.id);
+    if (index < 0) return;
+    _rows = List.of(_rows);
+    _rows[index] = _rows[index].copyWith(
+      items: items,
+      totalCount: merged.length == countBefore ? items.length : null,
+    );
+    notifyListeners();
   }
 
   static const _seerrEnrichConcurrency = 5;
@@ -2453,6 +2535,62 @@ class HomeViewModel extends ChangeNotifier {
       items: items,
       totalCount: totalCount,
     );
+  }
+
+  /// Jump tiles with no fetch behind them, so the row renders complete on the
+  /// first frame while the artwork catches up.
+  HomeRow _seerrShortcutsRow(
+    AppLocalizations l10n, {
+    Map<SeerrShortcut, String> backdrops = const {},
+  }) => _seerrRow(
+    'seerr_shortcuts',
+    l10n.seerrShortcutsRow,
+    [
+      for (final shortcut in SeerrShortcut.values)
+        AggregatedItem(
+          id: 'seerr_shortcut_${shortcut.name}',
+          serverId: 'seerr',
+          rawData: {
+            'Name': shortcut.label(l10n),
+            'Type': 'Folder',
+            'Overview': '',
+            'SeerrShortcut': shortcut.name,
+            'BackdropPath': backdrops[shortcut] ?? '',
+          },
+        ),
+    ],
+  );
+
+  /// One trending read dresses every tile. Artwork is the only thing it adds,
+  /// so a failure still leaves a usable row.
+  Future<HomeRow> _loadSeerrShortcutsRow(AppLocalizations l10n) async {
+    try {
+      final repo = await GetIt.instance.getAsync<SeerrRepository>();
+      await repo.ensureInitialized();
+      if (!repo.isAvailable) return _seerrShortcutsRow(l10n);
+
+      final page = await repo.getTrending(
+        limit: GetIt.instance<SeerrPreferences>().fetchLimit.limit,
+      );
+      final items = page.results.toList()..shuffle();
+      List<String> pathsFor(String mediaType) => [
+        for (final item in items)
+          if (item.mediaType == mediaType &&
+              (item.backdropPath?.isNotEmpty ?? false))
+            item.backdropPath!,
+      ];
+
+      return _seerrShortcutsRow(
+        l10n,
+        backdrops: pickShortcutBackdrops(
+          shortcuts: SeerrShortcut.values,
+          movieBackdrops: pathsFor('movie'),
+          tvBackdrops: pathsFor('tv'),
+        ),
+      );
+    } catch (_) {
+      return _seerrShortcutsRow(l10n);
+    }
   }
 
   AggregatedItem _seerrFilterItem({
